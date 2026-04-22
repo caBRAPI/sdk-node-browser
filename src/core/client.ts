@@ -18,6 +18,7 @@ export type ClientOptions = {
   type: ClientMode;
   config?: {
     key?: string;
+    baseURL?: string;
   };
 };
 
@@ -50,7 +51,7 @@ export class CoreClient {
         ? options.config?.key
         : undefined;
 
-    this.http = createAxios({ apiKey });
+    this.http = createAxios({ baseURL: options.config?.baseURL, apiKey });
 
     // ⚠️ aviso dev
     if (this.isBrowser && this.mode === "private") {

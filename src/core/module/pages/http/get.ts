@@ -11,6 +11,7 @@ export type Page = {
   updatedAt?: string;
   store?: {
     ownerId: string;
+    id: string;
   };
 };
 
@@ -24,24 +25,19 @@ type PageResponse = {
 
 /**
  * GET /pages/:domain
- *
- * Busca a página pública de uma loja pelo domínio.
- *
- * 🔓 Endpoint público (pode ser usado no navegador ou backend)
- *
- * @param core - Instância do CoreClient já configurada
- * @param domain - Domínio da loja (ex: "minhaloja.com.br")
- *
- * @returns Dados da página renderizada (HTML + metadados)
- *
- * @throws Error quando a página não existe ou a API retorna erro
  */
-export async function getPage(core: CoreClient, domain: string): Promise<Page> {
+export async function getPage(
+  core: CoreClient,
+  domain: string,
+): Promise<{ status: boolean; data: Page }> {
   const { data } = await core.http.get<PageResponse>(`/pages/${domain}`);
 
   if (!data?.data) {
     throw new Error(`Page not found: ${domain}`);
   }
 
-  return data.data;
+  return {
+    status: data.status,
+    data: data.data,
+  };
 }

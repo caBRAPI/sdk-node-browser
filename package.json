@@ -6,6 +6,8 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "author": "Sebastian Jn <sebastianjnuwu@gmail.com>",
+  "license": "Apache-2.0",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,14 +26,18 @@
     "lint": "npx @biomejs/biome lint --write",
     "format": "npx @biomejs/biome format --write"
   },
-  "dependencies": {
-    "axios": "^1.6.0"
-  },
   "devDependencies": {
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caBRAPI/sdk-node-browser"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

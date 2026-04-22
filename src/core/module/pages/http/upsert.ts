@@ -20,18 +20,11 @@ type PageUpsertResponse = {
  * Cria ou atualiza a página de uma loja.
  *
  * 🔒 Endpoint privado (somente backend)
- *
- * @param core - Instância do CoreClient (modo private)
- * @param input - Dados da página
- *
- * @returns `true` se operação foi bem-sucedida
- *
- * @throws Error se usado no navegador ou se a API retornar erro
  */
 export async function upsertPage(
   core: CoreClient,
   input: PageUpsertInput,
-): Promise<boolean> {
+): Promise<{ status: boolean; code: string }> {
   if (!core.isPrivate()) {
     throw new Error("Método privado disponível apenas no backend.");
   }
@@ -44,5 +37,5 @@ export async function upsertPage(
     },
   );
 
-  return data.status;
+  return data;
 }

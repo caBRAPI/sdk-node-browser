@@ -18,14 +18,14 @@ type DeletePageResponse = {
  * @param core - Instância do CoreClient (modo private)
  * @param domain - Domínio da página (ex: "minhaloja.com.br")
  *
- * @returns `true` se a exclusão foi bem-sucedida
+ * @returns Objeto com o status e código da resposta
  *
  * @throws Error se usado no navegador ou se a API retornar erro
  */
 export async function deletePage(
   core: CoreClient,
   domain: string,
-): Promise<boolean> {
+): Promise<{ status: boolean; code: string }> {
   if (!core.isPrivate()) {
     throw new Error("Método privado disponível apenas no backend.");
   }
@@ -34,5 +34,5 @@ export async function deletePage(
     `/pages/${domain}`,
   );
 
-  return data.status;
+  return data;
 }
