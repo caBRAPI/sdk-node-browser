@@ -1,5 +1,8 @@
 import type { CoreClient } from "../../../client";
 
+/**
+ * Dados necessários para criar ou atualizar uma página.
+ */
 export type PageUpsertInput = {
   domain: string;
   html: string;
@@ -7,7 +10,7 @@ export type PageUpsertInput = {
 };
 
 /**
- * Resposta do endpoint de upsert
+ * Resposta do endpoint de upsert.
  */
 type PageUpsertResponse = {
   status: boolean;
@@ -15,11 +18,27 @@ type PageUpsertResponse = {
 };
 
 /**
- * PUT /pages/:domain
+ * Cria ou atualiza a página pública associada ao `input.domain`.
  *
- * Cria ou atualiza a página de uma loja.
+ * Realiza uma requisição `PUT /pages/:domain` com o corpo contendo `html` e
+ * `template` (se fornecido). Este endpoint é marcado como privado — deve ser
+ * usado apenas por código backend que possua credenciais privadas.
  *
- * 🔒 Endpoint privado (somente backend)
+ * @param core - `CoreClient` configurado (deve estar em modo privado).
+ * @param input - Dados da página a persistir: `domain`, `html`, `template?`.
+ * @returns Promise que resolve com o objeto de resposta `{ status, code }`.
+ *
+ * @throws {Error} Se `core.isPrivate()` for falso (uso no navegador) ou se a
+ * requisição HTTP falhar.
+ *
+ * @example
+ * ```ts
+ * await upsertPage(coreClient, {
+ *   domain: "loja.exemplo.com",
+ *   html: "<html>...",
+ *   template: "landing-v2",
+ * });
+ * ```
  */
 export async function upsertPage(
   core: CoreClient,

@@ -1,7 +1,7 @@
 import type { CoreClient } from "../../../client";
 
 /**
- * Resposta do endpoint de exclusão de página
+ * Resposta do endpoint de exclusão de página.
  */
 type DeletePageResponse = {
   status: boolean;
@@ -9,18 +9,22 @@ type DeletePageResponse = {
 };
 
 /**
- * DELETE /pages/:domain
+ * Remove a página publicada referente ao `domain` informado.
  *
- * Remove a página publicada de uma loja pelo domínio.
+ * Executa uma requisição `DELETE /pages/:domain`. Este endpoint é privado e
+ * exige que o `CoreClient` esteja configurado em modo privado (backend).
  *
- * 🔒 Endpoint privado (somente backend)
+ * @param core - Instância do `CoreClient` (deve ser private).
+ * @param domain - Domínio da página a remover (ex.: "minhaloja.com.br").
+ * @returns Promise que resolve com `{ status, code }` retornado pela API.
  *
- * @param core - Instância do CoreClient (modo private)
- * @param domain - Domínio da página (ex: "minhaloja.com.br")
+ * @throws {Error} Se `core.isPrivate()` for falso (tentativa de uso no navegador)
+ * ou se a API retornar erro/HTTP failure.
  *
- * @returns Objeto com o status e código da resposta
- *
- * @throws Error se usado no navegador ou se a API retornar erro
+ * @example
+ * ```ts
+ * await deletePage(coreClient, "loja.exemplo.com");
+ * ```
  */
 export async function deletePage(
   core: CoreClient,
