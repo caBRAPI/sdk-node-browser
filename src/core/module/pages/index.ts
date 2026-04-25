@@ -43,7 +43,7 @@ export class Pages {
    * Construtor.
    * @param core - Instância de `CoreClient` usada para efetuar chamadas HTTP.
    */
-  constructor(private core: CoreClient) { }
+  constructor(private core: CoreClient) {}
 
   /**
    * Recupera a página associada ao `domain` informado.
