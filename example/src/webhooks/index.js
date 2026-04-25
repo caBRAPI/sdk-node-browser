@@ -33,3 +33,13 @@ client.webhooks
   .catch((err) => {
     console.log(err);
   });
+
+// Helper SDK: parse payload criptografado do webhook de assinatura (backend)
+// Exemplo para usar dentro do seu controller Express:
+//
+// const parsed = await client.webhooks.decrypty("SUA_API_KEY_PRIVATE", req.body.payload);
+// // ou:
+// // const parsed = await client.webhooks.decrypt("SUA_API_KEY_PRIVATE", req.body.payload);
+// if (parsed.event === "WEBHOOK_TEST") return res.sendStatus(205);
+// if (parsed.status !== "APPROVED") return res.sendStatus(200);
+// console.log(parsed);
