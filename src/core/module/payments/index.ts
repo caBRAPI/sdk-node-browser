@@ -16,8 +16,10 @@ export type PaymentStatus =
 
 export type PaymentGateway = "MERCADOPAGO" | "EFI_BANK";
 export type PaymentCreateGateway =
-  | "MERCADOPAGO_SERVICE_PIX"
-  | "MERCADOPAGO_SERVICE_CARD";
+  | "MERCADOPAGO_ORDER_PIX"
+  | "MERCADOPAGO_ORDER_CARD"
+  | "MERCADOPAGO_ORDER_BOLETO"
+  | "MERCADOPAGO_ORDER_SALDO";
 
 export type PaymentShipmentStatus =
   | "PENDING"
@@ -127,6 +129,7 @@ export type CreatePaymentResponse = {
     payment: {
       uuid: string;
       url?: string;
+      order_id?: string;
       qr_code?: {
         image: string;
         base_64: string;

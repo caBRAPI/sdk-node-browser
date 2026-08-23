@@ -39,7 +39,7 @@ client.payments
     name: "Joao Silva",
     email: "joao@email.com",
     cpf: "12345678909",
-    gateway: "MERCADOPAGO_SERVICE_PIX",
+    gateway: "MERCADOPAGO_ORDER_PIX",
     coupon: "BEMVINDO10",
     metadata: {
       source: "sdk-example",
