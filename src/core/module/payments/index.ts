@@ -14,12 +14,15 @@ export type PaymentStatus =
   | "CHARGED_BACK"
   | "EXPIRED";
 
-export type PaymentGateway = "MERCADOPAGO" | "EFI_BANK";
+export type PaymentGateway = "MERCADOPAGO" | "ASAAS" | "EFI_BANK";
 export type PaymentCreateGateway =
   | "MERCADOPAGO_ORDER_PIX"
   | "MERCADOPAGO_ORDER_CARD"
   | "MERCADOPAGO_ORDER_BOLETO"
-  | "MERCADOPAGO_ORDER_SALDO";
+  | "MERCADOPAGO_ORDER_SALDO"
+  | "ASAAS_ORDER_PIX"
+  | "ASAAS_ORDER_CARD"
+  | "ASAAS_ORDER_BOLETO";
 
 export type PaymentShipmentStatus =
   | "PENDING"
@@ -129,11 +132,20 @@ export type CreatePaymentResponse = {
     payment: {
       uuid: string;
       url?: string;
+      init_point?: string;
       order_id?: string;
       qr_code?: {
         image: string;
         base_64: string;
       };
+      pixQrCode?: {
+        encodedImage: string;
+        payload: string;
+        expirationDate?: string;
+      };
+      copyPastePix?: string | null;
+      invoiceUrl?: string;
+      bankSlipUrl?: string;
     };
   };
 };

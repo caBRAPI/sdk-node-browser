@@ -59,6 +59,27 @@ client.payments
     console.log(err);
   });
 
+// POST /stores/:storeId/payments (public) — Asaas PIX
+client.payments
+  .post(storeId, {
+    name: "Joao Silva",
+    email: "joao@email.com",
+    cpf: "12345678909",
+    gateway: "ASAAS_ORDER_PIX",
+    items: [
+      {
+        productId: "c6f0d28a-8ce2-4a8f-9771-4df1f2a7f3a1",
+        quantity: 1,
+      },
+    ],
+  })
+  .then((payment) => {
+    console.log(payment);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 // PUT /stores/:storeId/payments/:paymentId (private)
 client.payments
   .put(storeId, paymentId, {
